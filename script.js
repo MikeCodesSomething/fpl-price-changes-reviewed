@@ -35,7 +35,60 @@ fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRbLHukC_yBzeaturQs00p2le
 
         table.appendChild(row);
       });
-    })
-    .catch(error => {
-      console.error("Error fetching Google Sheets data: ", error);
-    });
+
+    // Highlight the highest value in specified rows after the data is imported
+    highlightHighestValues([1,6,7,12]);
+    // Highlight the lowest value in specified rows after the data is imported
+    highlightLowestValues([2,3,4,5,8,9,10,11]);
+  })
+  .catch(error => {
+    console.error("Error fetching Google Sheets data: ", error);
+  });
+
+function highlightHighestValues(inputRows) {
+  const table = document.getElementById("data-table");
+  const rows = table.getElementsByTagName("tr");
+
+  for (let i = 0; i < inputRows.length; i++) {
+    const cells = rows[inputRows[i]].getElementsByTagName("td");
+    let maxCellValue = -Infinity;
+    let maxCellIndex = -1;
+
+    for (let j = 0; j < cells.length; j++) {
+      const cellValue = parseFloat(cells[j].textContent);
+
+      if (!isNaN(cellValue) && cellValue > maxCellValue) {
+        maxCellValue = cellValue;
+        maxCellIndex = j;
+      }
+    }
+
+    if (maxCellIndex !== -1) {
+      cells[maxCellIndex].classList.add("highlight");
+    }
+  }
+}
+
+function highlightLowestValues(inputRows) {
+  const table = document.getElementById("data-table");
+  const rows = table.getElementsByTagName("tr");
+
+  for (let i = 0; i < inputRows.length; i++) {
+    const cells = rows[inputRows[i]].getElementsByTagName("td");
+    let minCellValue = Infinity; 
+    let minCellIndex = -1;
+
+    for (let j = 0; j < cells.length; j++) {
+      const cellValue = parseFloat(cells[j].textContent);
+
+      if (!isNaN(cellValue) && cellValue < minCellValue) {
+        minCellValue = cellValue;
+        minCellIndex = j;
+      }
+    }
+
+    if (minCellIndex !== -1) {
+      cells[minCellIndex].classList.add("highlight"); 
+    }
+  }
+}
