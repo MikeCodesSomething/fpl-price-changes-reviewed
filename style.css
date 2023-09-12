@@ -18,6 +18,18 @@ html {
     background-color: #1F2937;
     color: white;
   }
+
+h1 {
+  width: min(100%, 800px);
+  margin: auto;
+  text-align: center;
+}
+
+p {
+  width: min(100%, 800px);
+  margin: auto;
+  text-align: center;
+}
   
   table {
     border-collapse: collapse;
