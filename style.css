@@ -12,6 +12,9 @@
   font-style: normal;
 
 }
+:root {
+  --max-content: min(95%, 900px);
+}
 
 html {
     font-family: 'Roboto';
@@ -19,79 +22,96 @@ html {
     color: white;
   }
 
+a {
+  color:white;
+}
+
 h1 {
-  width: min(100%, 800px);
+  width: var(--max-content);
   margin: auto;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
-p {
-  width: min(100%, 800px);
+div.container {
+  width: var(--max-content);
   margin: auto;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div.narrative {
+  width: var(--max-content);
+  margin: auto;
+}
+
+.intro {
+  width: 40ch;
+  margin: 0.25rem auto;
 }
   
-  table {
-    border-collapse: collapse;
-    letter-spacing: 1px;
-    font-size: 0.8rem;
-    background: #323232;
-    width: min(100%, 800px);
-    margin: auto;
-    
-  }
-  tr {
-    border-radius: 5px;
-  }
+table {
+  border-collapse: collapse;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  background: #323232;
+  width: var(--max-content);
+  margin: auto;
+  margin-bottom: 1rem;
   
-  caption, td, th {
-    padding: 1rem;
-  }
-  
-  th {
-    background-color: rgb(12, 1, 37);
-  }
-  
+}
+tr {
+  border-radius: 5px;
+}
+
+caption, td, th {
+  padding: 1rem;
+}
+
+th {
+  background-color: rgb(12, 1, 37);
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: hsl(0 0% 0% / 0.3);
+}
+
+tr:nth-child(odd) td {
+  background-color: hsl(0 0% 0% / 0.1);
+}
+
+
+td.highlight {
+  background-color: rgb(2, 99, 2) !important;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
   td {
-    text-align: center;
+    display: grid;
+    grid-template-columns: 25ch auto;
   }
-  
-  tr:nth-child(even) td {
-    background-color: hsl(0 0% 0% / 0.3);
-  }
-  
-  tr:nth-child(odd) td {
-    background-color: hsl(0 0% 0% / 0.1);
-  }
-  
-
-  td.highlight {
-    background-color: rgb(2, 99, 2) !important;
-    font-weight: bold;
-  }
-
-  .hidden {
+  th {
     display: none;
   }
-
-  @media (max-width: 600px) {
-    td {
-      display: grid;
-      grid-template-columns: 25ch auto;
-    }
-    th {
-      display: none;
-    }
-    td::before {
-      content: attr(data-cell);
-    }
-    tr:last-child > td::before {
-      content: "";
-    }
-    td:first-child {
-      background-color: rgb(12, 1, 37) !important;
-      font-weight: bold;
-      padding-top: 1rem;
-
-    }
+  td::before {
+    content: attr(data-cell);
   }
+  tr:last-child > td::before {
+    content: "";
+  }
+  td:first-child {
+    background-color: rgb(12, 1, 37) !important;
+    font-weight: bold;
+    padding-top: 1rem;
+
+  }
+}
